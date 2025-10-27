@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections.Generic;
+using NUnit.Framework;
 
 public class ZanderG_ChestWeights : MonoBehaviour
 {
@@ -44,15 +46,43 @@ public class ZanderG_ChestWeights : MonoBehaviour
     [SerializeField] int PlatinumChestEpic;
     [SerializeField] int PlatinumChestLegendary;
 
+    static int chestTypeTotal;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        List<int> chestTypes = new List<int>() { WoodChest, BronzeChest, SilverChest, GoldChest, PlatinumChest };
+
+        chestTypeTotal = WoodChest + BronzeChest + SilverChest + GoldChest + PlatinumChest;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            int randomNumber = Random.Range(0, chestTypeTotal+1);
+
+            if(randomNumber <= WoodChest)
+            {
+                Debug.Log("Wooden");
+            }
+            else if(randomNumber <= BronzeChest + WoodChest)
+            {
+                Debug.Log("Bronze");
+            }
+            else if (randomNumber <= SilverChest + BronzeChest + WoodChest)
+            {
+                Debug.Log("Silver");
+            }
+            else if (randomNumber <= GoldChest + SilverChest + BronzeChest + WoodChest)
+            {
+                Debug.Log("Gold");
+            }
+            else
+            {
+                Debug.Log("Platinum");
+            }
+        }
     }
 }
